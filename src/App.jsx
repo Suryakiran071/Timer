@@ -6,7 +6,6 @@ function App() {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
 
-  // Start Timer
   const startTimer = () => {
     if (!isRunning) {
       intervalRef.current = setInterval(() => {
@@ -23,25 +22,21 @@ function App() {
     }
   };
 
-  // Pause Timer
   const pauseTimer = () => {
     clearInterval(intervalRef.current);
     setIsRunning(false);
   };
 
-  // Reset Timer
   const resetTimer = () => {
     clearInterval(intervalRef.current);
     setSeconds(0);
     setIsRunning(false);
   };
 
-  // Add +5 Seconds
   const addFiveSeconds = () => {
     setSeconds((prev) => Math.min(prev + 5, MAX_TIME));
   };
 
-  // Format as MM:SS
   const formatTime = (secs) => {
     const mins = String(Math.floor(secs / 60)).padStart(2, "0");
     const secsStr = String(secs % 60).padStart(2, "0");
@@ -52,7 +47,7 @@ function App() {
     <div className="min-h-screen w-full bg-black text-white flex flex-col items-center justify-center px-4 py-10 text-center">
       {/* Timer Display */}
       <div className="relative flex items-center justify-center mb-10">
-        <div className="absolute w-72 h-72 rounded-full bg-white opacity-10 blur-3xl"></div>
+        <div className="absolute w-72 h-72 rounded-full bg-white opacity-10 blur-3xl pointer-events-none"></div>
         <h1 className="text-[20vw] sm:text-[15vw] md:text-[10vw] font-extrabold z-10">
           {formatTime(seconds)}
         </h1>
@@ -63,14 +58,14 @@ function App() {
         {!isRunning ? (
           <button
             onClick={startTimer}
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded w-40"
+            className="cursor-pointer bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded w-40"
           >
             Start
           </button>
         ) : (
           <button
             onClick={pauseTimer}
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded w-40"
+            className="cursor-pointer bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded w-40"
           >
             Pause
           </button>
@@ -78,14 +73,14 @@ function App() {
 
         <button
           onClick={addFiveSeconds}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded w-40"
+          className="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded w-40"
         >
           +5 Seconds
         </button>
 
         <button
           onClick={resetTimer}
-          className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded w-40"
+          className="cursor-pointer bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded w-40"
         >
           Restart
         </button>
